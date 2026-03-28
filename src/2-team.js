@@ -39,14 +39,18 @@ class Team {
     moveToBench(name) {
         const index = this.#starters.findIndex(player => player.name === name)
         if (index !== -1) {
-            this.#starters;
+            const removePlayer = this.#starters.splice(index, 1);
+            removePlayer.forEach((player) => this.#bench.push(player));
             return true;
         }
         return false;
     }
     moveToStarters(name) {
-        if (this.#bench.find((el) => el === name)) {
-            this.#bench.push(name)
+        const index = this.#bench.findIndex(player => player.name === name);
+        if (index !== -1) {
+            const toStarters = this.#bench.splice(index, 1);
+            toStarters.forEach((player) => this.#starters.push(player));
+            return true;
 
         } else {
             return false;
